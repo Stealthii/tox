@@ -204,7 +204,7 @@ class Pip(Installer[Python]):
         if of_type == "package_deps" and self.constrain_package_deps:
             constraints_file = self.constraints_file()
             if constraints_file.exists():
-                deps = [*deps, f"-c{constraints_file}"]
+                deps = [f"-c{constraints_file}", *deps]
 
         cmd = self.build_install_cmd(deps)
         outcome = self._env.execute(cmd, stdin=StdinSource.OFF, run_id=f"install_{of_type}")
